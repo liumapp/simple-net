@@ -4,13 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.jhg023</groupId>
-    <artifactId>SimpleNet</artifactId>
-    <version>1.6.5</version>
+    <groupId>com.liumapp.simplenet</groupId>
+    <artifactId>simple-net</artifactId>
+    <version>v1.0.0</version>
 
-    <name>SimpleNet</name>
-    <description>An easy-to-use, event-driven, asynchronous, network application framework compiled with Java 11.</description>
-    <url>https://github.com/jhg023/SimpleNet</url>
+    <name>simple-net</name>
+    <description>An easy-to-use, event-driven, asynchronous, network application framework compiled with Java 8.</description>
+    <url>https://github.com/liumapp/simple-net</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <junit.jupiter.version>5.6.0</junit.jupiter.version>
+        <java.version>1.8</java.version>
+    </properties>
 
     <licenses>
         <license>
@@ -26,12 +33,18 @@
             <organization>com.github.jhg023</organization>
             <organizationUrl>https://github.com/jhg023/SimpleNet</organizationUrl>
         </developer>
+        <developer>
+            <name>liumapp</name>
+            <email>liumapp.com@gmail.com</email>
+            <url>http://www.liumapp.com</url>
+        </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/jhg023/SimpleNet.git</connection>
-        <developerConnection>scm:git:ssh://github.com:jhg023/SimpleNet.git</developerConnection>
-        <url>https://github.com/jhg023/SimpleNet</url>
+        <connection>scm:git:https://github.com/liumapp/simple-net.git</connection>
+        <developerConnection>scm:git:https://github.com/liumapp/simple-net.git</developerConnection>
+        <url>https://github.com/liumapp/simple-net</url>
+        <tag>${project.version}</tag>
     </scm>
 
     <distributionManagement>
@@ -41,15 +54,10 @@
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
+            <name>Maven Central Staging Repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <junit.jupiter.version>5.6.0</junit.jupiter.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -87,51 +95,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.6.1</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <compilerArgument>-Xlint</compilerArgument>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <attach>false</attach>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
-                        <id>attach-sources</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
                         </goals>
@@ -139,26 +117,15 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>7.3.1</version>
-                    </dependency>
-                </dependencies>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.3</version>
+                <extensions>true</extensions>
                 <configuration>
-                    <additionalOptions>-Xdoclint:none</additionalOptions>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <stagingProgressTimeoutMinutes>20</stagingProgressTimeoutMinutes>
                 </configuration>
             </plugin>
             <plugin>
@@ -177,8 +144,47 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration> <!-- add this to disable checking -->
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4.1</version>
+                <configuration>
+                    <!-- get all project dependencies -->
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <!-- MainClass in mainfest make a executable jar -->
+                    <archive>
+                        <manifest>
+                            <mainClass>com.liumapp.workable.converter.Console</mainClass>
+                        </manifest>
+                    </archive>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- bind to the packaging phase -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

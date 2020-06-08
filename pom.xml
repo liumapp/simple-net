@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.liumapp.simplenet</groupId>
+  <artifactId>simple-net-parent</artifactId>
+  <version>v1.0.0</version>
+  <packaging>pom</packaging>
+
+  <name>simple-net-parent</name>
+  <url>http://maven.apache.org</url>
+  <description>An easy-to-use, event-driven, asynchronous, network application framework compiled with Java 8.</description>
+
+  <developers>
+    <developer>
+      <name>Jacob Glickman</name>
+      <email>jhg023@bucknell.edu</email>
+      <organization>com.github.jhg023</organization>
+      <organizationUrl>https://github.com/jhg023/SimpleNet</organizationUrl>
+    </developer>
+    <developer>
+      <name>liumapp</name>
+      <email>liumapp.com@gmail.com</email>
+      <url>http://www.liumapp.com</url>
+    </developer>
+  </developers>
+
+  <!--<modules>simple-net-core</modules>-->
+
+</project>
