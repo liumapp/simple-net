@@ -99,7 +99,7 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
             }
 
             Client client = pair.getKey();
-            Buffer buffer = pair.getValue().flip();
+            ByteBuffer buffer = (ByteBuffer) pair.getValue().flip();
 
             synchronized (client.queue) {
                 Deque<IntPair<Predicate<ByteBuffer>>> queue = client.queue;
@@ -121,12 +121,11 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
                 client.inCallback.set(true);
 
                 while (buffer.remaining() >= (key = peek.getKey())) {
-//                    buffer.
-                    var wrappedBuffer = buffer.duplicate().mark().limit(buffer.position() + key);
+                    ByteBuffer wrappedBuffer = (ByteBuffer) buffer.duplicate().mark().limit(buffer.position() + key);
 
                     if (shouldDecrypt) {
                         try {
-                            wrappedBuffer = client.decryptionFunction.apply(client.decryptionCipher, wrappedBuffer)
+                            wrappedBuffer = (ByteBuffer) client.decryptionFunction.apply(client.decryptionCipher, wrappedBuffer)
                                     .reset();
                         } catch (Exception e) {
                             throw new IllegalStateException("An exception occurred whilst encrypting data:", e);
@@ -141,7 +140,8 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
                     if (wrappedBuffer.hasRemaining()) {
                         int remaining = wrappedBuffer.remaining();
                         byte[] decodedData = new byte[Math.min(key, 8)];
-                        wrappedBuffer.reset().get(decodedData);
+                        wrappedBuffer = (ByteBuffer) wrappedBuffer.reset();
+                        wrappedBuffer.get(decodedData);
                         LOGGER.warn("A packet has not been read fully! {} byte(s) leftover! First 8 bytes of data: {}",
                                 remaining, decodedData);
                     }
@@ -170,7 +170,7 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
                 } else {
                     // Because the queue is NOT empty and we don't have enough data to process the request,
                     // we must read more data.
-                    var newBuffer = DIRECT_BUFFER_POOL.take(peek.getKey());
+                    ByteBuffer newBuffer = DIRECT_BUFFER_POOL.take(peek.getKey());
                     client.channel.read(newBuffer, new Pair<>(client, newBuffer), this);
                 }
             }
@@ -186,7 +186,7 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
      * The {@link CompletionHandler} used when this {@link Client} sends one or more {@link Packet}s to a
      * {@link Server}.
      */
-    private final CompletionHandler<Integer, ByteBuffer> packetHandler = new CompletionHandler<>() {
+    private final CompletionHandler<Integer, ByteBuffer> packetHandler = new CompletionHandler<Integer, ByteBuffer>() {
         @Override
         public void completed(Integer result, ByteBuffer buffer) {
             Client client = Client.this;
