@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import com.github.simplenet.Client;
-import com.github.simplenet.Server;
-import com.github.simplenet.packet.Packet;
-import com.github.simplenet.utility.exposed.cryptography.CryptographicFunction;
+import com.liumapp.simplenet.Client;
+import com.liumapp.simplenet.Server;
+import com.liumapp.simplenet.packet.Packet;
+import com.liumapp.simplenet.utility.exposed.cryptography.CryptographicFunction;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,8 +39,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
-import static com.github.simplenet.utility.exposed.cryptography.CryptographicFunction.DO_FINAL;
-import static com.github.simplenet.utility.exposed.cryptography.CryptographicFunction.UPDATE;
+import static com.liumapp.simplenet.utility.exposed.cryptography.CryptographicFunction.DO_FINAL;
+import static com.liumapp.simplenet.utility.exposed.cryptography.CryptographicFunction.UPDATE;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

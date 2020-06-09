@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-import com.github.simplenet.Client;
-import com.github.simplenet.Server;
-import com.github.simplenet.packet.Packet;
+import com.liumapp.simplenet.Client;
+import com.liumapp.simplenet.Server;
+import com.liumapp.simplenet.packet.Packet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -25,6 +25,8 @@
     </developer>
   </developers>
 
-  <!--<modules>simple-net-core</modules>-->
+  <modules>
+    <module>simple-net-core</module>
+  </modules>
 
 </project>
