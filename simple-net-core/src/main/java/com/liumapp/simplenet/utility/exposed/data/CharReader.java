@@ -158,8 +158,8 @@ public interface CharReader extends DataReader {
      * @param n          The amount of {@code char}s requested.
      * @param consumer   Holds the operations that should be performed once the {@code n} {@code char}s are received.
      */
-    private void processChars(ByteBuffer buffer, int n, Consumer<char[]> consumer) {
-        var c = new char[n];
+    default void processChars(ByteBuffer buffer, int n, Consumer<char[]> consumer) {
+        char[] c = new char[n];
         buffer.asCharBuffer().get(c);
         consumer.accept(c);
     }

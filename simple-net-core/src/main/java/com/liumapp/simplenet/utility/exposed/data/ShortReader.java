@@ -158,8 +158,8 @@ public interface ShortReader extends DataReader {
      * @param n          The amount of {@code short}s requested.
      * @param consumer   Holds the operations that should be performed once the {@code n} {@code short}s are received.
      */
-    private void processShorts(ByteBuffer buffer, int n, Consumer<short[]> consumer) {
-        var s = new short[n];
+    default void processShorts(ByteBuffer buffer, int n, Consumer<short[]> consumer) {
+        short[] s = new short[n];
         buffer.asShortBuffer().get(s);
         consumer.accept(s);
     }

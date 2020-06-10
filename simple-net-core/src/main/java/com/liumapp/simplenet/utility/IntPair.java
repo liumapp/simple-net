@@ -78,7 +78,7 @@ public final class IntPair<V> {
             return false;
         }
         
-        var pair = (IntPair<?>) o;
+        IntPair<?> pair = (IntPair<?>) o;
         
         return key == pair.key && Objects.equals(value, pair.value);
     }

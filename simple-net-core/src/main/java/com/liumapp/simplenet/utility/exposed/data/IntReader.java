@@ -157,8 +157,8 @@ public interface IntReader extends DataReader {
      * @param n          The amount of {@code int}s requested.
      * @param consumer   Holds the operations that should be performed once the {@code n} {@code int}s are received.
      */
-    private void processInts(ByteBuffer buffer, int n, Consumer<int[]> consumer) {
-        var i = new int[n];
+    default void processInts(ByteBuffer buffer, int n, Consumer<int[]> consumer) {
+        int[] i = new int[n];
         buffer.asIntBuffer().get(i);
         consumer.accept(i);
     }

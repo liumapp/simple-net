@@ -78,7 +78,7 @@ public final class Pair<K, V> {
             return false;
         }
 
-        var pair = (Pair<?, ?>) o;
+        Pair<?,?> pair = (Pair<?, ?>) o;
 
         return Objects.equals(key, pair.key) && Objects.equals(value, pair.value);
     }

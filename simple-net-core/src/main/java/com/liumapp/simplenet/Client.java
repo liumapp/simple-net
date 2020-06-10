@@ -452,14 +452,22 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
             flush();
 
             while (writeInProgress.get()) {
-                Thread.onSpinWait();
+                try {
+                    TimeUnit.SECONDS.sleep(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
         Channeled.super.close();
 
         while (channel.isOpen()) {
-            Thread.onSpinWait();
+            try {
+                TimeUnit.SECONDS.sleep(0);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         postDisconnectListeners.forEach(Runnable::run);
@@ -520,7 +528,7 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
             n = Utility.roundUpToNextMultiple(n, blockSize == 0 ? decryptionCipher.getOutputSize(n) : blockSize);
         }
 
-        var pair = new IntPair<Predicate<ByteBuffer>>(n, buffer -> predicate.test(buffer.order(order)));
+        IntPair<Predicate<ByteBuffer>> pair = new IntPair<Predicate<ByteBuffer>>(n, buffer -> predicate.test(buffer.order(order)));
 
         synchronized (queue) {
             if (inCallback.get()) {
@@ -531,7 +539,7 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
             queue.offerFirst(pair);
 
             if (!readInProgress.getAndSet(true)) {
-                var buffer = DIRECT_BUFFER_POOL.take(n);
+                ByteBuffer buffer = DIRECT_BUFFER_POOL.take(n);
                 channel.read(buffer, new Pair<>(this, buffer), Listener.INSTANCE);
             }
         }
@@ -555,13 +563,13 @@ public class Client extends AbstractReceiver<Runnable> implements Channeled<Asyn
 
                 ByteBuffer raw = DIRECT_BUFFER_POOL.take(packet.getSize(this));
 
-                for (var input : queue) {
+                for (Consumer<ByteBuffer> input : queue) {
                     input.accept(raw);
                 }
 
                 if (shouldEncrypt) {
                     try {
-                        raw = encryptionFunction.apply(encryptionCipher, raw.flip());
+                        raw = encryptionFunction.apply(encryptionCipher, (ByteBuffer) raw.flip());
                     } catch (GeneralSecurityException e) {
                         throw new IllegalStateException("An exception occurred whilst encrypting data!", e);
                     }

@@ -110,7 +110,7 @@ public interface StringReader extends ShortReader {
      */
     default void readStringUntil(Predicate<String> predicate, Charset charset, ByteOrder order) {
         readShortUntil(length -> {
-            var toReturn = new boolean[1];
+            boolean[] toReturn = new boolean[1];
             processBytes(length, string -> toReturn[0] = predicate.test(string), charset, order);
             return toReturn[0];
         });
@@ -162,11 +162,11 @@ public interface StringReader extends ShortReader {
      * @param consumer   Holds the operations that should be performed once the {@code n} bytes are received.
      * @param charset    The {@link Charset} encoding of the {@link String}.
      */
-    private void processBytes(short n, Consumer<String> consumer, Charset charset, ByteOrder order) {
+    default void processBytes(short n, Consumer<String> consumer, Charset charset, ByteOrder order) {
         int length = order == ByteOrder.LITTLE_ENDIAN ? Short.reverseBytes(n) : n;
         
         read(Byte.BYTES * (length & 0xFFFF), buffer -> {
-            var b = new byte[length];
+            byte[] b = new byte[length];
             buffer.get(b);
             consumer.accept(new String(b, charset));
         }, order);

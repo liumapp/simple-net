@@ -157,8 +157,8 @@ public interface LongReader extends DataReader {
      * @param n          The amount of {@code long}s requested.
      * @param consumer   Holds the operations that should be performed once the {@code n} {@code long}s are received.
      */
-    private void processLongs(ByteBuffer buffer, int n, Consumer<long[]> consumer) {
-        var l = new long[n];
+    default void processLongs(ByteBuffer buffer, int n, Consumer<long[]> consumer) {
+        long[] l = new long[n];
         buffer.asLongBuffer().get(l);
         consumer.accept(l);
     }

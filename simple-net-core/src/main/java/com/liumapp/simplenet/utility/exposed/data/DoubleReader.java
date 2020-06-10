@@ -157,7 +157,7 @@ public interface DoubleReader extends DataReader {
      * @param n          The amount of {@code double}s requested.
      * @param consumer   Holds the operations that should be performed once the {@code n} {@code double}s are received.
      */
-    private void processDoubles(ByteBuffer buffer, int n, Consumer<double[]> consumer) {
+    default void processDoubles(ByteBuffer buffer, int n, Consumer<double[]> consumer) {
         double[] d = new double[n];
         buffer.asDoubleBuffer().get(d);
         consumer.accept(d);
