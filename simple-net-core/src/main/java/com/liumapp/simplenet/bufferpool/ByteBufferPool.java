@@ -25,7 +25,6 @@ package com.liumapp.simplenet.bufferpool;
 
 import java.nio.ByteBuffer;
 import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * A pool that can contain both {@code HeapByteBuffer}s and {@code DirectByteBuffer}s.
