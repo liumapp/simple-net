@@ -23,8 +23,9 @@
  */
 package com.liumapp.simplenet.bufferpool.direct;
 
+import com.liumapp.simplenet.bufferpool.ByteBufferPool;
+
 import java.nio.ByteBuffer;
-import pbbl.ByteBufferPool;
 
 /**
  * Represents a pool of {@code DirectByteBuffer}s.

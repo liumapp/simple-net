@@ -23,6 +23,8 @@
  */
 package com.liumapp.simplenet;
 
+import com.liumapp.simplenet.bufferpool.ByteBufferPool;
+import com.liumapp.simplenet.bufferpool.direct.DirectByteBufferPool;
 import com.liumapp.simplenet.packet.Packet;
 import com.liumapp.simplenet.utility.IntPair;
 import com.liumapp.simplenet.utility.MutableBoolean;
@@ -39,8 +41,6 @@ import com.liumapp.simplenet.utility.exposed.data.LongReader;
 import com.liumapp.simplenet.utility.exposed.data.StringReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pbbl.ByteBufferPool;
-import pbbl.direct.DirectByteBufferPool;
 
 import javax.crypto.Cipher;
 import java.io.IOException;

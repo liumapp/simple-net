@@ -23,8 +23,9 @@
  */
 package com.liumapp.simplenet.bufferpool.heap;
 
+import com.liumapp.simplenet.bufferpool.ByteBufferPool;
+
 import java.nio.ByteBuffer;
-import pbbl.ByteBufferPool;
 
 /**
  * Represents a pool of {@code HeapByteBuffer}s.
