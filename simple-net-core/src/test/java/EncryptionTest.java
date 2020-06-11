@@ -89,13 +89,13 @@ final class EncryptionTest {
     }
 
     private Cipher[] initCiphers(String cipher) throws GeneralSecurityException {
-        var ivSpec = new IvParameterSpec(sharedSecret);
-        var keySpec = new SecretKeySpec(sharedSecret, "AES");
+        IvParameterSpec ivSpec = new IvParameterSpec(sharedSecret);
+        SecretKeySpec keySpec = new SecretKeySpec(sharedSecret, "AES");
 
-        var serverEncryption = Cipher.getInstance(cipher);
-        var serverDecryption = Cipher.getInstance(cipher);
-        var clientEncryption = Cipher.getInstance(cipher);
-        var clientDecryption = Cipher.getInstance(cipher);
+        Cipher serverEncryption = Cipher.getInstance(cipher);
+        Cipher serverDecryption = Cipher.getInstance(cipher);
+        Cipher clientEncryption = Cipher.getInstance(cipher);
+        Cipher clientDecryption = Cipher.getInstance(cipher);
 
         serverEncryption.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
         serverDecryption.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
@@ -108,11 +108,11 @@ final class EncryptionTest {
 
     private void startTest(int port, String algorithm, CryptographicFunction encryption,
                            CryptographicFunction decryption) throws GeneralSecurityException {
-        var server = new Server();
+        Server server = new Server();
 
         server.bind("localhost", port);
 
-        var ciphers = initCiphers(algorithm);
+        Cipher[] ciphers = initCiphers(algorithm);
 
         server.onConnect(client -> {
             client.setEncryption(ciphers[0], encryption);
@@ -141,7 +141,7 @@ final class EncryptionTest {
             });
         });
 
-        var client = new Client();
+        Client client = new Client();
 
         client.onConnect(() -> {
             client.setEncryption(ciphers[2], encryption);

@@ -1,5 +1,3 @@
-<img src="https://maven-badges.herokuapp.com/maven-central/com.github.jhg023/SimpleNet/badge.svg"> <img src="http://githubbadges.com/star.svg?user=jhg023&repo=SimpleNet&background=0000ff&color=ffffff&style=flat">
-
 # What is SimpleNet?
 SimpleNet is a simplistic, client-server framework written in Java. One or more `Client` objects can connect to a `Server` and send data back-and-forth via TCP. Most methods that read data from the network are non-blocking and are invoked asynchronously when the requested data arrives. Not having to block a thread and wait for data is what makes SimpleNet scalable for different types of applications such as chat servers, multiplayer game servers, and so much more!
 # Maven/Gradle Dependency
@@ -9,16 +7,16 @@ Maven:
 
 ```xml
 <dependency>
-    <groupId>com.github.jhg023</groupId>
-    <artifactId>SimpleNet</artifactId>
-    <version>1.6.5</version>
+    <groupId>com.liumapp.simplenet</groupId>
+    <artifactId>simple-net</artifactId>
+    <version>v1.0.0</version>
 </dependency>
 ```
 
 Gradle:
 
 ```groovy
-implementation 'com.github.jhg023:SimpleNet:1.6.5'
+implementation 'com.liumapp.simplenet:simple-net:v1.0.0'
 ```
 
  2. Because SimpleNet is compiled with Java 11, you must first require its module in your `module-info.java`:

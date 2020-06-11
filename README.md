@@ -7,16 +7,16 @@ Maven:
 
 ```xml
 <dependency>
-    <groupId>com.github.jhg023</groupId>
-    <artifactId>SimpleNet</artifactId>
-    <version>1.6.5</version>
+    <groupId>com.liumapp.simplenet</groupId>
+    <artifactId>simple-net</artifactId>
+    <version>v1.0.0</version>
 </dependency>
 ```
 
 Gradle:
 
 ```groovy
-implementation 'com.github.jhg023:SimpleNet:1.6.5'
+implementation 'com.liumapp.simplenet:simple-net:v1.0.0'
 ```
 
  2. Because SimpleNet is compiled with Java 11, you must first require its module in your `module-info.java`:
