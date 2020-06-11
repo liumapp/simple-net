@@ -27,6 +27,7 @@
 
   <modules>
     <module>simple-net-core</module>
+    <module>simple-net-demo</module>
   </modules>
 
 </project>
